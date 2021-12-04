@@ -1,0 +1,33 @@
+# image cache
+*.png
+
+# runtime cache
+__pycache__/
+cqsv/*/data/
+cqsv/*/logs
+cqsv/*/session.token
+cqsv/*/password.encrypt
+cqsv/*/device.json*
+*.log
+./verify/
+signin_stamps
+
+# venv
+.venv/
+
+# vsc
+.vscode/
+
+# binary
+*.so
+
+# fonts
+fonts
+fonts/
+
+# configs
+fortune/
+verify/
+templates.json
+muteme_nolimit
+

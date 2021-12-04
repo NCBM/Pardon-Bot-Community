@@ -1,0 +1,21 @@
+image: python:latest
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PYPI_MIRROR: https://pypi.tuna.tsinghua.edu.cn/simple
+
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+
+before_script:
+  - python -V  # Print out python version for debugging
+  - pip install -i $PYPI_MIRROR virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
+
+test:
+  script:
+    - pip install flake8
+    - flake8 ./ --exclude=venv --extend-ignore=E722
