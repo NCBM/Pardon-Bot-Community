@@ -23,7 +23,6 @@ export.info = PluginInfo(
     "[状态] @ + 状态\n"
     "[反馈] @ + 如何反馈\n"
     "(开发者) [停机] @ + 停机\n"
-    "(开发者) [更新] @ + 更新\n"
     "(开发者) [挂起] @ + 挂起\n"
     "(开发者) [恢复] @ + 恢复\n"
     "(开发者) [切换分支] @ + 切换分支 [目标分支]"
@@ -36,7 +35,7 @@ plugin_config = Config(**global_config.dict())
 
 COMMIT_BITS = 8
 FEEDBACK_MAIL = """
-gitlab-incoming+pardon-natrium-pardon-bot-76-issue-@huajitech.net
+contact-project+pardon-na-pardon-bot-feedback@proj.zone
 """[1:-1]
 # updater = BackgroundScheduler()
 # updater.start()
@@ -72,9 +71,8 @@ async def bstop_escape(bot: Bot, event: MessageEvent):
     # 机器人停止运行
     await check_perm(bot, event)
     await bot.send(message="即将停机", event=event)
-    # subprocess.run(["pkill", "go-cqhttp"])
-    subprocess.run(["sudo", "pkill", "nb"])
-    exit(0)
+    # subprocess.run(["sudo", "pkill", "nb"])
+    sys.exit(0)
 
 info = on_command("信息", rule=to_me())
 
@@ -117,14 +115,6 @@ async def feedback_h(bot: Bot, event: MessageEvent):
     )
     pass
 
-update = on_command("更新", rule=to_me(), priority=-2, block=True)
-
-
-@update.handle()
-async def update_escape(bot: Bot, event: MessageEvent):
-    await check_perm(bot, event)
-    subprocess.run(["git", "pull"])
-    await bot.send(event, "已试图更新，查看信息以确认是否完成更新")
 
 hangup = on_message(priority=-1, block=False)
 
